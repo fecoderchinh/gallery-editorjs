@@ -124,7 +124,7 @@ export default class SimpleCarousel {
         if (item.firstChild.value) {
           data.push({
             url: item.firstChild.value,
-            caption: item.lastChild.value
+            caption: caption.innerHTML || ''
           });
         }
       }
@@ -215,13 +215,16 @@ export default class SimpleCarousel {
   _createImage(url, item, captionText, removeBtn) {
     const image = document.createElement('img');
     // const caption = make('input', [this.CSS.caption, this.CSS.input]);
-    const caption = make('div', [this.CSS.caption, this.CSS.block ]);
+    const caption = make('div', [this.CSS.caption, this.CSS.block]);
 
     image.src = url;
-    if (captionText) {
-      caption.value = captionText;
-    }
-    caption.placeholder = this.config.captionPlaceholder;
+    // if (captionText) {
+    //   caption.value = captionText;
+    // }
+    // caption.placeholder = this.config.captionPlaceholder;
+
+    caption.contentEditable = true;
+    caption.innerHTML = captionText || '';
 
     removeBtn.style.display = 'flex';
 
