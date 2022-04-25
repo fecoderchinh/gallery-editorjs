@@ -214,8 +214,7 @@ export default class SimpleCarousel {
    */
   _createImage(url, item, captionText, removeBtn) {
     const image = document.createElement('img');
-    // const caption = make('input', [this.CSS.caption, this.CSS.input]);
-    const caption = make('div', [this.CSS.caption, this.CSS.block]);
+    const caption = make('div', [this.CSS.caption, this.CSS.input]);
 
     image.src = url;
     // if (captionText) {
