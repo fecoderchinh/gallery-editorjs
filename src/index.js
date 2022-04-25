@@ -116,6 +116,7 @@ export default class SimpleCarousel {
   // eslint-disable-next-line require-jsdoc
   save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
+    const caption = blockContent.querySelector('[contenteditable]');
     const data = [];
 
     if (list.length > 0) {
