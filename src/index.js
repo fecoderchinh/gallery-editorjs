@@ -162,7 +162,8 @@ export default class SimpleCarousel {
         if (item.firstChild.value) {
           data.push({
             url: item.firstChild.value,
-            caption: caption.innerHTML || ''
+            caption: caption.innerHTML || '',
+            slide: this.tunes.find(tune => tune.name === 'slideEnable')
           });
         }
       }
@@ -351,12 +352,6 @@ export default class SimpleCarousel {
    * @param {boolean} status - true for enable, false for disable
    */
   applyTune(tuneName, status) {
-    if(tuneName === 'slideEnable') {
-      this.data.push({
-        slideEnable: true || false
-      });
-    }
-
     this.wrapper.classList.toggle(`${this.CSS.wrapper}--${tuneName}`, status);
   }
 
