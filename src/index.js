@@ -167,9 +167,7 @@ export default class SimpleCarousel {
         }
       }
       data.push({
-        tunes: this.tunes,
-        _data: this._data,
-        config: this.config
+        slideEnable: this._data['slideEnable']
       });
     }
     return data;
