@@ -2,6 +2,8 @@ import { make } from './ui';
 import bgIcon from './svg/background.svg';
 import borderIcon from './svg/border.svg';
 import stretchedIcon from './svg/stretched.svg';
+import columnAdd from './svg/col-add.svg';
+import columnMinus from './svg/col-minus.svg';
 
 /**
  * Working with Block Tunes
@@ -29,6 +31,16 @@ export default class Tunes {
    */
   static get tunes() {
     return [
+      {
+        name: 'columnAdd',
+        icon: columnAdd,
+        title: 'Increase Column'
+      },
+      {
+        name: 'columnMinus',
+        icon: columnMinus,
+        title: 'Decrease Column'
+      },
       {
         name: 'withBorder',
         icon: borderIcon,
