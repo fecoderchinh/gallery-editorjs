@@ -351,7 +351,7 @@ export default class SimpleCarousel {
    * @param {boolean} status - true for enable, false for disable
    */
   applyTune(tuneName, status) {
-    this.wrapper.toggle(`${this.CSS.wrapper}--${tuneName}`, status);
+    this.wrapper.classList.toggle(`${this.CSS.wrapper}--${tuneName}`, status);
   }
 
   /**
