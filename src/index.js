@@ -328,7 +328,7 @@ export default class SimpleCarousel {
   setTune(tuneName, value) {
     this._data[tuneName] = value;
 
-    this.ui.applyTune(tuneName, value);
+    this.applyTune(tuneName, value);
 
     if (tuneName === 'stretched') {
       /**
@@ -343,6 +343,15 @@ export default class SimpleCarousel {
           // console.error(err);
         }*/);
     }
+  }
+
+  /**
+   * Apply visual representation of activated tune
+   * @param {string} tuneName - one of available tunes {@link Tunes.tunes}
+   * @param {boolean} status - true for enable, false for disable
+   */
+  applyTune(tuneName, status) {
+    this.wrapper.toggle(`${this.CSS.wrapper}--${tuneName}`, status);
   }
 
   /**
