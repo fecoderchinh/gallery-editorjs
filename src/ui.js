@@ -75,7 +75,7 @@ export default class Ui {
       imageEl: 'image-tool__image-picture',
       caption: 'image-tool__caption'
     };
-  };
+  }
 
   /**
    * Ui statuses:
@@ -115,10 +115,11 @@ export default class Ui {
    */
   createAddButton() {
     const addButton = make('div', [ this.CSS.button ]);
+
     addButton.innerHTML = this.config.buttonContent || `${buttonIcon} Add Image`;
     addButton.addEventListener('click', () => {
       this.nodes.list.appendChild();
-      console.log(this.nodes.list);
+      // console.log(this.nodes.list);
     });
     return addButton;
   }

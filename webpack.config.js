@@ -27,7 +27,7 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   [
-                    "postcss-nesting",
+                    'postcss-nesting',
                     {
                       // Options
                     },

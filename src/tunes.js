@@ -17,6 +17,9 @@ export default class Tunes {
     this.buttons = [];
   }
 
+  /**
+   * Each Block Tune must have at least isTune static getter and the render() method.
+   */
   static get isTune() {
     return true;
   }

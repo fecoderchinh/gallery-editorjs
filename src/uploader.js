@@ -49,7 +49,7 @@ export default class Uploader {
         const customUpload = this.config.uploader.uploadByFile(files[0]);
 
         if (!isPromise(customUpload)) {
-          console.warn('Custom uploader method uploadByFile should return a Promise');
+          // console.warn('Custom uploader method uploadByFile should return a Promise');
         }
 
         return customUpload;
@@ -92,7 +92,7 @@ export default class Uploader {
       upload = this.config.uploader.uploadByUrl(url);
 
       if (!isPromise(upload)) {
-        console.warn('Custom uploader method uploadByUrl should return a Promise');
+        // console.warn('Custom uploader method uploadByUrl should return a Promise');
       }
     } else {
       /**
@@ -144,7 +144,7 @@ export default class Uploader {
       upload = this.config.uploader.uploadByFile(file);
 
       if (!isPromise(upload)) {
-        console.warn('Custom uploader method uploadByFile should return a Promise');
+        // console.warn('Custom uploader method uploadByFile should return a Promise');
       }
     } else {
       /**
