@@ -17,6 +17,10 @@ export default class Tunes {
     this.buttons = [];
   }
 
+  static get isTune() {
+    return true;
+  }
+
   /**
    * Available Image tunes
    */

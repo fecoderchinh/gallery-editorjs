@@ -6,12 +6,22 @@ require('./index.css').toString();
 // eslint-disable-next-line require-jsdoc
 export default class SimpleCarousel {
   /**
+   * Notify core that read-only mode is supported
+   *
+   * @returns {boolean}
+   */
+  static get isReadOnlySupported() {
+    return true;
+  }
+  
+  /**
    * @param {CarousellData} data - previously saved data
    * @param {CarouselConfig} config - user config for Tool
    * @param {object} api - Editor.js API
    */
-  constructor({ data, config, api }) {
+  constructor({ data, config, api, readOnly  }) {
     this.api = api;
+    this._data = {};
     this.data = data;
     this.IconClose = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon--cross" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
     this.IconLeft = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>';
@@ -24,7 +34,8 @@ export default class SimpleCarousel {
       types: config.types || 'image/*',
       captionPlaceholder: this.api.i18n.t('Caption'),
       buttonContent: config.buttonContent || '',
-      uploader: config.uploader || undefined
+      uploader: config.uploader || undefined,
+      actions: config.actions || [],
     };
     /**
      * Module for file uploading
@@ -34,6 +45,82 @@ export default class SimpleCarousel {
       onUpload: (response) => this.onUpload(response),
       onError: (error) => this.uploadingFailed(error)
     });
+
+    /**
+     * Module for working with UI
+     */
+    this.ui = new Ui({
+      api,
+      config: this.config,
+      onSelectFile: () => {
+        this.uploader.uploadSelectedFile({
+          onPreview: (src) => {
+            this.ui.showPreloader(src);
+          },
+        });
+      },
+      readOnly,
+    });
+
+    /**
+     * Module for working with tunes
+     */
+    this.tunes = new Tunes({
+      api,
+      actions: this.config.actions,
+      onChange: (tuneName) => this.tuneToggled(tuneName),
+    });
+  }
+
+  /**
+   * Callback fired when Block Tune is activated
+   *
+   * @private
+   *
+   * @param {string} tuneName - tune that has been clicked
+   * @returns {void}
+   */
+  tuneToggled(tuneName) {
+    // inverse tune state
+    this.setTune(tuneName, !this._data[tuneName]);
+  }
+
+  /**
+   * Set one tune
+   *
+   * @param {string} tuneName - {@link Tunes.tunes}
+   * @param {boolean} value - tune state
+   * @returns {void}
+   */
+  setTune(tuneName, value) {
+    this._data[tuneName] = value;
+
+    this.ui.applyTune(tuneName, value);
+
+    if (tuneName === 'stretched') {
+      /**
+       * Wait until the API is ready
+       */
+      Promise.resolve().then(() => {
+        const blockId = this.api.blocks.getCurrentBlockIndex();
+
+        this.api.blocks.stretchBlock(blockId, value);
+      })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }
+
+  /**
+   * Makes buttons with tunes: add background, add border, stretch image
+   *
+   * @public
+   *
+   * @returns {Element}
+   */
+  renderSettings() {
+    return this.tunes.render(this.data);
   }
 
   /**
