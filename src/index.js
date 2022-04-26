@@ -162,11 +162,13 @@ export default class SimpleCarousel {
         if (item.firstChild.value) {
           data.push({
             url: item.firstChild.value,
-            caption: caption.innerHTML || '',
-            slide: this.tunes.find(tune => tune.name === 'slideEnable')
+            caption: caption.innerHTML || ''
           });
         }
       }
+      data.push({
+        slide: this.tunes.find(tune => tune.name === 'slideEnable')
+      });
     }
     return data;
   }
