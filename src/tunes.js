@@ -4,6 +4,7 @@ import borderIcon from './svg/border.svg';
 import stretchedIcon from './svg/stretched.svg';
 import columnAdd from './svg/col-add.svg';
 import columnMinus from './svg/col-minus.svg';
+import slideEnable from './svg/slide.svg';
 
 /**
  * Working with Block Tunes
@@ -40,6 +41,11 @@ export default class Tunes {
         name: 'columnMinus',
         icon: columnMinus,
         title: 'Decrease Column'
+      },
+      {
+        name: 'slideEnable',
+        icon: slideEnable,
+        title: 'Enable Slide'
       },
       {
         name: 'withBorder',
