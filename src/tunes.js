@@ -1,7 +1,7 @@
 import { make } from './ui';
-// import bgIcon from './svg/background.svg';
-// import borderIcon from './svg/border.svg';
-// import stretchedIcon from './svg/stretched.svg';
+import bgIcon from './svg/background.svg';
+import borderIcon from './svg/border.svg';
+import stretchedIcon from './svg/stretched.svg';
 import columnAdd from './svg/col-add.svg';
 import columnMinus from './svg/col-minus.svg';
 import slideEnable from './svg/slide.svg';
@@ -47,21 +47,21 @@ export default class Tunes {
         icon: slideEnable,
         title: 'Enable Slide'
       },
-      // {
-      //   name: 'withBorder',
-      //   icon: borderIcon,
-      //   title: 'With border'
-      // },
-      // {
-      //   name: 'stretched',
-      //   icon: stretchedIcon,
-      //   title: 'Stretch image'
-      // },
-      // {
-      //   name: 'withBackground',
-      //   icon: bgIcon,
-      //   title: 'With background'
-      // }
+      {
+        name: 'withBorder',
+        icon: borderIcon,
+        title: 'With border'
+      },
+      {
+        name: 'stretched',
+        icon: stretchedIcon,
+        title: 'Stretch image'
+      },
+      {
+        name: 'withBackground',
+        icon: bgIcon,
+        title: 'With background'
+      }
     ];
   }
 
@@ -99,11 +99,7 @@ export default class Tunes {
       });
 
       el.dataset.tune = tune.name;
-      if(tune.name === 'slideEnable') {
-        el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
-      } else {
-        el.classList.toggle('updown-col', toolData[tune.name]);
-      }
+      el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
 
       this.buttons.push(el);
 
