@@ -102,7 +102,7 @@ export default class Tunes {
       if(tune.name === 'slideEnable') {
         el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
       } else {
-        el.classList.toggle(this.CSS.wrapper, toolData[tune.name]);
+        el.classList.toggle('updown-col', toolData[tune.name]);
       }
 
       this.buttons.push(el);
