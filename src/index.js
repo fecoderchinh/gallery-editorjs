@@ -167,7 +167,9 @@ export default class SimpleCarousel {
         }
       }
       data.push({
-        tunes: this.tunes
+        tunes: this.tunes,
+        _data: this._data,
+        config: this.config
       });
     }
     return data;
