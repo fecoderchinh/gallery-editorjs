@@ -75,57 +75,6 @@ export default class SimpleCarousel {
   }
 
   /**
-   * Callback fired when Block Tune is activated
-   *
-   * @private
-   *
-   * @param {string} tuneName - tune that has been clicked
-   * @returns {void}
-   */
-  tuneToggled(tuneName) {
-    // inverse tune state
-    this.setTune(tuneName, !this._data[tuneName]);
-  }
-
-  /**
-   * Set one tune
-   *
-   * @param {string} tuneName - {@link Tunes.tunes}
-   * @param {boolean} value - tune state
-   * @returns {void}
-   */
-  setTune(tuneName, value) {
-    this._data[tuneName] = value;
-
-    this.ui.applyTune(tuneName, value);
-
-    if (tuneName === 'stretched') {
-      /**
-       * Wait until the API is ready
-       */
-      Promise.resolve().then(() => {
-        const blockId = this.api.blocks.getCurrentBlockIndex();
-
-        this.api.blocks.stretchBlock(blockId, value);
-      })
-        .catch(/* err => {
-          // console.error(err);
-        }*/);
-    }
-  }
-
-  /**
-   * Makes buttons with tunes: add background, add border, stretch image
-   *
-   * @public
-   *
-   * @returns {Element}
-   */
-  renderSettings() {
-    return this.tunes.render(this.data);
-  }
-
-  /**
    * CSS classes
    * @constructor
    */
@@ -354,6 +303,57 @@ export default class SimpleCarousel {
       message: this.api.i18n.t('Can not upload an image, try another'),
       style: 'error'
     });
+  }
+
+  /**
+   * Callback fired when Block Tune is activated
+   *
+   * @private
+   *
+   * @param {string} tuneName - tune that has been clicked
+   * @returns {void}
+   */
+  tuneToggled(tuneName) {
+    // inverse tune state
+    this.setTune(tuneName, !this._data[tuneName]);
+  }
+
+  /**
+   * Set one tune
+   *
+   * @param {string} tuneName - {@link Tunes.tunes}
+   * @param {boolean} value - tune state
+   * @returns {void}
+   */
+  setTune(tuneName, value) {
+    this._data[tuneName] = value;
+
+    this.ui.applyTune(tuneName, value);
+
+    if (tuneName === 'stretched') {
+      /**
+       * Wait until the API is ready
+       */
+      Promise.resolve().then(() => {
+        const blockId = this.api.blocks.getCurrentBlockIndex();
+
+        this.api.blocks.stretchBlock(blockId, value);
+      })
+        .catch(/* err => {
+          // console.error(err);
+        }*/);
+    }
+  }
+
+  /**
+   * Makes buttons with tunes: add background, add border, stretch image
+   *
+   * @public
+   *
+   * @returns {Element}
+   */
+  renderSettings() {
+    return this.tunes.render(this.data);
   }
 
   /**
