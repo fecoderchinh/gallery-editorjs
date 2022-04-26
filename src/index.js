@@ -162,10 +162,13 @@ export default class SimpleCarousel {
         if (item.firstChild.value) {
           data.push({
             url: item.firstChild.value,
-            caption: caption.innerHTML || ''
+            caption: caption.innerHTML || '',
           });
         }
       }
+      data.push({
+        tunes: this.tunes
+      });
     }
     return data;
   }
@@ -351,9 +354,6 @@ export default class SimpleCarousel {
    * @param {boolean} status - true for enable, false for disable
    */
   applyTune(tuneName, status) {
-    this.data.push({
-      tuneName: status
-    });
     this.wrapper.classList.toggle(`${this.CSS.wrapper}--${tuneName}`, status);
   }
 
