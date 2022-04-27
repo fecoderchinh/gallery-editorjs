@@ -27,7 +27,7 @@ export default class Uploader {
    */
   uploadSelectedFile({ onPreview }) {
     const preparePreview = function (file) {
-      const reader = new FileReader();
+      const reader = new window.FileReader();
 
       reader.readAsDataURL(file);
       reader.onload = (e) => {
@@ -128,7 +128,7 @@ export default class Uploader {
      *
      * @type {FileReader}
      */
-    const reader = new FileReader();
+    const reader = new window.FileReader();
 
     reader.readAsDataURL(file);
     reader.onload = (e) => {
@@ -150,7 +150,7 @@ export default class Uploader {
       /**
        * Default uploading
        */
-      const formData = new FormData();
+      const formData = new window.FormData();
 
       formData.append(this.config.field, file);
 
@@ -183,5 +183,5 @@ export default class Uploader {
  * @returns {boolean}
  */
 function isPromise(object) {
-  return object && typeof object.then === 'function';
+  return window.Promise.resolve(object) === object;
 }
