@@ -145,7 +145,7 @@ export default class SimpleCarousel {
     this.wrapper.appendChild(this.list);
     if (this.data.length > 0) {
       // console.log('load_item render', this.data);
-      for (const load of this.data) {
+      for (const load of this.data['data']) {
         const loadItem = this.creteNewItem(load.url, load.caption);
 
         this.list.insertBefore(loadItem, this.addButton);
@@ -159,11 +159,8 @@ export default class SimpleCarousel {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
     const data = {
-      test: this.config,
       config: {
         slideEnable: this._data['slideEnable'] !== undefined ? this._data['slideEnable'] : false,
-        columnAdd: this._data['columnAdd'] !== undefined ? this._data['columnAdd'] : false,
-        columnMinus: this._data['columnMinus'] !== undefined ? this._data['columnMinus'] : false,
       },
       data: []
     };

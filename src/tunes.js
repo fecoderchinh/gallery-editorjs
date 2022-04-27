@@ -89,21 +89,23 @@ export default class Tunes {
     this.buttons = [];
 
     Tunes.tunes.forEach(tune => {
-      const el = make('div', [this.CSS.buttonBase, this.CSS.button], {
-        innerHTML: tune.icon,
-        title: tune.title
-      });
+      if(tune.name === 'slideEnable') {
+        const el = make('div', [this.CSS.buttonBase, this.CSS.button], {
+          innerHTML: tune.icon,
+          title: tune.title
+        });
 
-      el.addEventListener('click', () => {
-        this.tuneClicked(tune.name);
-      });
+        el.addEventListener('click', () => {
+          this.tuneClicked(tune.name);
+        });
 
-      el.dataset.tune = tune.name;
-      el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
+        el.dataset.tune = tune.name;
+        el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
 
-      this.buttons.push(el);
+        this.buttons.push(el);
 
-      wrapper.appendChild(el);
+        wrapper.appendChild(el);
+      }
     });
 
     return wrapper;
