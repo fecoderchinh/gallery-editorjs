@@ -24,7 +24,6 @@ export default class SimpleCarousel {
   constructor({ data, config, api, readOnly  }) {
     this.api = api;
     this._data = [];
-    this.data = data['data'];
     this.data = {
       data: data['data'],
       config: data['config'],
