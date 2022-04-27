@@ -38,6 +38,7 @@ export default class SimpleCarousel {
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
       actions: config.actions || [],
+      options: data['config'],
     };
     /**
      * Module for file uploading
