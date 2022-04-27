@@ -37,8 +37,7 @@ export default class SimpleCarousel {
       captionPlaceholder: this.api.i18n.t('Caption'),
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
-      actions: config.actions || [],
-      options: data['config'],
+      actions: data['config'] || [],
     };
     /**
      * Module for file uploading
@@ -156,14 +155,7 @@ export default class SimpleCarousel {
   save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
-    const data = {
-      config: {
-        slideEnable: this._data['slideEnable'],
-        columnAdd: this._data['columnAdd'],
-        columnMinus: this._data['columnMinus'],
-      },
-      data: []
-    };
+    const data = {config: {slideEnable: this._data['slideEnable']}, data: []};
 
     if (list.length > 0) {
       for (const item of list) {
