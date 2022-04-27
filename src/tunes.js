@@ -96,7 +96,7 @@ export default class Tunes {
 
       el.addEventListener('click', () => {
         this.tuneClicked(tune.name);
-        el.classList.toggle('cdx-settings-button--active');
+        this.classList.toggle('cdx-settings-button--active');
       });
 
       // el.dataset.tune = tune.name;
