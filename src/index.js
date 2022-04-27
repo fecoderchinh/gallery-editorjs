@@ -24,10 +24,7 @@ export default class SimpleCarousel {
   constructor({ data, config, api, readOnly  }) {
     this.api = api;
     this._data = [];
-    this.data = {
-      data: data['data'],
-      config: data['config']
-    };
+    this.data = data['data'];
     this.IconClose = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon--cross" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
     this.IconLeft = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>';
     this.IconRight = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>';
@@ -41,6 +38,7 @@ export default class SimpleCarousel {
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
       actions: config.actions || [],
+      options: data['config'] || [],
     };
     /**
      * Module for file uploading
@@ -145,7 +143,7 @@ export default class SimpleCarousel {
     this.wrapper.appendChild(this.list);
     if (this.data.length > 0) {
       // console.log('load_item render', this.data);
-      for (const load of this.data['data']) {
+      for (const load of this.data) {
         const loadItem = this.creteNewItem(load.url, load.caption);
 
         this.list.insertBefore(loadItem, this.addButton);
@@ -159,8 +157,11 @@ export default class SimpleCarousel {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
     const data = {
+      test: this.config,
       config: {
         slideEnable: this._data['slideEnable'] !== undefined ? this._data['slideEnable'] : false,
+        columnAdd: this._data['columnAdd'] !== undefined ? this._data['columnAdd'] : false,
+        columnMinus: this._data['columnMinus'] !== undefined ? this._data['columnMinus'] : false,
       },
       data: []
     };
