@@ -277,7 +277,7 @@ export default class SimpleCarousel {
    * @private
    */
   _acceptTuneView() {
-    this.settings.forEach( tune => {
+    this.tunes.forEach( tune => {
       this.wrapper.classList.toggle(tune.name, !!this._data[tune.name]);
     });
   }
