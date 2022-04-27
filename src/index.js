@@ -166,11 +166,8 @@ export default class SimpleCarousel {
           });
         }
       }
-      data.push({
-        slideEnable: this._data['slideEnable']
-      });
     }
-    return data;
+    return Object.assign(data, {slideEnable: this._data['slideEnable']});
   }
 
   /**
