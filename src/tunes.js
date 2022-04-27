@@ -99,7 +99,7 @@ export default class Tunes {
       });
 
       el.dataset.tune = tune.name;
-      el.classList.toggle(this.CSS.buttonActive, toolData['data'][tune.name]);
+      el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
 
       this.buttons.push(el);
 
