@@ -23,6 +23,7 @@ export default class SimpleCarousel {
    */
   constructor({ data, config, api, readOnly  }) {
     this.api = api;
+    this._data = [];
     this.data = data['data'];
     this.IconClose = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon--cross" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
     this.IconLeft = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>';
@@ -154,7 +155,7 @@ export default class SimpleCarousel {
   save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
-    const data = {config: {slideEnable: this.data['slideEnable']}, data: []};
+    const data = {config: {slideEnable: this._data['slideEnable']}, data: []};
 
     if (list.length > 0) {
       for (const item of list) {
@@ -314,7 +315,7 @@ export default class SimpleCarousel {
    */
   tuneToggled(tuneName) {
     // inverse tune state
-    this.setTune(tuneName, !this.data['config'].tuneName);
+    this.setTune(tuneName, !this._data[tuneName]);
   }
 
   /**
@@ -325,7 +326,7 @@ export default class SimpleCarousel {
    * @returns {void}
    */
   setTune(tuneName, value) {
-    this.data['config'].tuneName = value;
+    this._data[tuneName] = value;
 
     this.applyTune(tuneName, value);
 
