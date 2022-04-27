@@ -38,7 +38,6 @@ export default class SimpleCarousel {
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
       actions: config.actions || [],
-      options: data['config'] || [],
     };
     /**
      * Module for file uploading
@@ -156,15 +155,7 @@ export default class SimpleCarousel {
   save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
-    const data = {
-      test: this.config,
-      config: {
-        slideEnable: this._data['slideEnable'] !== undefined ? this._data['slideEnable'] : false,
-        columnAdd: this._data['columnAdd'] !== undefined ? this._data['columnAdd'] : false,
-        columnMinus: this._data['columnMinus'] !== undefined ? this._data['columnMinus'] : false,
-      },
-      data: []
-    };
+    const data = {config: {slideEnable: this._data['slideEnable']}, data: []};
 
     if (list.length > 0) {
       for (const item of list) {
@@ -371,7 +362,7 @@ export default class SimpleCarousel {
    * @returns {Element}
    */
   renderSettings() {
-    return this.tunes.render(this.data['config']);
+    return this.tunes.render(this._data);
   }
 
   /**
