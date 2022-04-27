@@ -328,8 +328,7 @@ export default class SimpleCarousel {
   setTune(tuneName, value) {
     this._data[tuneName] = value;
 
-    this.ui.applyTune(tuneName, value);
-    // this.applyTune(tuneName, value);
+    this.applyTune(tuneName, value);
 
     if (tuneName === 'stretched') {
       /**
