@@ -198,7 +198,9 @@ export default class SimpleCarousel {
       this.setTune(tune, value);
     });
 
-    return [...data, ...this._data];
+    data.push({config: this._data});
+
+    return data;
   }
 
   /**
