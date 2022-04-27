@@ -38,7 +38,6 @@ export default class SimpleCarousel {
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
       actions: config.actions || [],
-      slideEnable: this._data['slideEnable'] !== undefined ? this._data['slideEnable'] : false,
     };
     /**
      * Module for file uploading
@@ -268,18 +267,6 @@ export default class SimpleCarousel {
 
     item.appendChild(image);
     item.appendChild(caption);
-
-    this._acceptTuneView();
-  }
-
-  /**
-   * Add specified class corresponds with activated tunes
-   * @private
-   */
-  _acceptTuneView() {
-    this.tunes.forEach( tune => {
-      this.wrapper.classList.toggle(tune.name, !!this._data[tune.name]);
-    });
   }
 
   /**
