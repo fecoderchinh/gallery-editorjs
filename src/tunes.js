@@ -94,10 +94,11 @@ export default class Tunes {
         title: tune.title
       });
 
-      el.addEventListener('click', () => {
-        this.tuneClicked(tune.name);
-        this.classList.toggle('cdx-settings-button--active');
-      });
+      if(tune.name === 'slideEnable') {
+        el.addEventListener('click', () => {
+          this.tuneClicked(tune.name);
+        });
+      }
 
       // el.dataset.tune = tune.name;
       // el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
