@@ -83,7 +83,7 @@ export default class Tunes {
    * @param {ImageToolData} toolData
    * @return {Element}
    */
-  render(toolData) {
+  render() {
     const wrapper = make('div', this.CSS.wrapper);
 
     this.buttons = [];
@@ -98,8 +98,8 @@ export default class Tunes {
         this.tuneClicked(tune.name);
       });
 
-      el.dataset.tune = tune.name;
-      el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
+      // el.dataset.tune = tune.name;
+      // el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
 
       this.buttons.push(el);
 
