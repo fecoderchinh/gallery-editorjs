@@ -362,7 +362,7 @@ export default class SimpleCarousel {
    * @returns {Element}
    */
   renderSettings() {
-    return this.tunes.render(this._data);
+    return this.tunes.render(this.data['config']);
   }
 
   /**
