@@ -167,7 +167,7 @@ export default class SimpleCarousel {
         }
       }
     }
-    return {data, slideEnable: this._data['slideEnable']};
+    return data;
   }
 
   /**
@@ -362,7 +362,7 @@ export default class SimpleCarousel {
    * @returns {Element}
    */
   renderSettings() {
-    return this.tunes.render(this.data);
+    return this.tunes.render(this._data);
   }
 
   /**
