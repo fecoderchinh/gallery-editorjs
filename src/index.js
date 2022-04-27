@@ -156,6 +156,8 @@ export default class SimpleCarousel {
     const caption = blockContent.querySelector('[contenteditable]');
     const data = [];
 
+    data.push({slideEnable: this._data['slideEnable']});
+
     if (list.length > 0) {
       for (const item of list) {
         if (item.firstChild.value) {
