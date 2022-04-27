@@ -154,7 +154,7 @@ export default class SimpleCarousel {
   save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
-    const data = [];
+    const data = [ {slideEnable: this.data['slideEnable']} ];
 
     if (list.length > 0) {
       for (const item of list) {
@@ -166,9 +166,7 @@ export default class SimpleCarousel {
         }
       }
     }
-    return Object.assign(this.data, {
-      data: data
-    });
+    return data;
   }
 
   /**
