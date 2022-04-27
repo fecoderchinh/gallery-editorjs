@@ -314,7 +314,7 @@ export default class SimpleCarousel {
    */
   tuneToggled(tuneName) {
     // inverse tune state
-    this.setTune(tuneName, !this.data[tuneName]);
+    this.setTune(tuneName, !this.data['config'].tuneName);
   }
 
   /**
@@ -325,7 +325,7 @@ export default class SimpleCarousel {
    * @returns {void}
    */
   setTune(tuneName, value) {
-    this.data[tuneName] = value;
+    this.data['config'].tuneName = value;
 
     this.applyTune(tuneName, value);
 
