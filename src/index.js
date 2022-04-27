@@ -147,7 +147,7 @@ export default class SimpleCarousel {
     this.wrapper.appendChild(this.list);
     if (this.data.length > 0) {
       // console.log('load_item render', this.data);
-      for (const load of this.data) {
+      for (const load of this.data['data']) {
         const loadItem = this.creteNewItem(load.url, load.caption);
 
         this.list.insertBefore(loadItem, this.addButton);
@@ -179,12 +179,12 @@ export default class SimpleCarousel {
   save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
-    const data = [];
+    const data = {data: [], config: []};
 
     if (list.length > 0) {
       for (const item of list) {
         if (item.firstChild.value) {
-          data.push({
+          data['data'].push({
             url: item.firstChild.value,
             caption: caption.innerHTML || '',
           });
@@ -198,7 +198,7 @@ export default class SimpleCarousel {
       this.setTune(tune, value);
     });
 
-    data.push({config: this._data});
+    data['config'].push(this._data);
 
     return data;
   }
