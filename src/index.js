@@ -167,6 +167,13 @@ export default class SimpleCarousel {
         }
       }
     }
+
+    Tunes.tunes.forEach(({ name: tune }) => {
+      const value = typeof data['config'][tune] !== 'undefined' ? data['config'][tune] === true || data[tune] === 'true' : false;
+
+      this.setTune(tune, value);
+    });
+
     return data;
   }
 
