@@ -4,7 +4,9 @@ import { make } from './ui';
 // import stretchedIcon from './svg/stretched.svg';
 // import columnAdd from './svg/col-add.svg';
 // import columnMinus from './svg/col-minus.svg';
-import slideEnable from './svg/slide.svg';
+import carouselEnable from './svg/slide.svg';
+import masonryEnable from './svg/columns.svg';
+import standardLayout from './svg/grid.svg';
 
 /**
  * Working with Block Tunes
@@ -43,9 +45,19 @@ export default class Tunes {
       //   title: 'Decrease Column'
       // },
       {
-        name: 'slideEnable',
-        icon: slideEnable,
-        title: 'Enable Slide'
+        name: 'standardLayout',
+        icon: standardLayout,
+        title: 'Standard Layout',
+      },
+      {
+        name: 'carouselEnable',
+        icon: carouselEnable,
+        title: 'Enable Slide',
+      },
+      {
+        name: 'masonryEnable',
+        icon: masonryEnable,
+        title: 'Enable Masonry',
       },
       // {
       //   name: 'withBorder',
@@ -99,7 +111,7 @@ export default class Tunes {
       });
 
       el.dataset.tune = tune.name;
-      el.classList.toggle(this.CSS.buttonActive, toolData[tune.name]);
+      el.classList.toggle(this.CSS.buttonActive, toolData['config'][tune.name]);
 
       this.buttons.push(el);
 

@@ -140,9 +140,9 @@ export default class SimpleCarousel {
 
     this.list.appendChild(this.addButton);
     this.wrapper.appendChild(this.list);
-    if (this.data.length > 0) {
-      // console.log('load_item render', this.data);
-      for (const load of this.data) {
+    if (this._data.items.length > 0) {
+      // console.log('load_item render', this._data.items);
+      for (const load of this._data.items) {
         const loadItem = this.creteNewItem(load.url, load.caption);
 
         this.list.insertBefore(loadItem, this.addButton);
@@ -155,7 +155,7 @@ export default class SimpleCarousel {
   /* save(blockContent) {
     const list = blockContent.getElementsByClassName(this.CSS.item);
     const caption = blockContent.querySelector('[contenteditable]');
-    const data = {config: {slideEnable: this._data['slideEnable']}, data: []};
+    const data = {config: {carouselEnable: this._data['carouselEnable']}, data: []};
 
     if (list.length > 0) {
       for (const item of list) {
@@ -195,27 +195,19 @@ export default class SimpleCarousel {
    *
    * @param {ImageToolData} data - data in Image Tool format
    */
-  set data(data) {
-    const list = this.api.blocks.getElementsByClassName(this.CSS.item);
-    const caption = this.api.blocks.querySelector('[contenteditable]');
-    // const data = {config: {slideEnable: this._data['slideEnable']}, data: []};
-
-    if (list.length > 0) {
-      for (const item of list) {
-        if (item.firstChild.value) {
-          data['data'].push({
-            url: item.firstChild.value,
-            caption: caption.innerHTML || '',
-          });
-        }
-      }
+  set data(listData) {
+    if (!listData) {
+      listData = {};
     }
 
-    Tunes.tunes.forEach(({ name: tune }) => {
-      const value = typeof data['config'][tune] !== 'undefined' ? data['config'][tune] === true || data[tune] === 'true' : false;
+    this._data.config = listData.config || Tunes.tunes.find((tune) => tune.default === true).name;
+    this._data.items = listData.items || [];
 
-      this.setTune(tune, value);
-    });
+    const oldView = this.wrapper;
+
+    if (oldView) {
+      oldView.parentNode.replaceChild(this.render(), oldView);
+    }
   }
 
   /**
@@ -226,6 +218,29 @@ export default class SimpleCarousel {
    * @returns {ImageToolData}
    */
   get data() {
+    this._data.items = [];
+
+    const list = this.wrapper.getElementsByClassName(this.CSS.item);
+    const caption = this.wrapper.querySelector('[contenteditable]');
+    // const data = {config: {carouselEnable: this._data['carouselEnable']}, data: []};
+
+    if (list.length > 0) {
+      for (const item of list) {
+        if (item.firstChild.value) {
+          this._data.items.push({
+            url: item.firstChild.value,
+            caption: caption.innerHTML || '',
+          });
+        }
+      }
+    }
+
+    Tunes.tunes.forEach(({ name: tune }) => {
+      const value = typeof this._data['config'][tune] !== 'undefined' ? this._data['config'][tune] === true || this._data['config'][tune] === 'true' : false;
+
+      this.setTune(tune, value);
+    });
+
     return this._data;
   }
 
@@ -374,7 +389,7 @@ export default class SimpleCarousel {
    */
   tuneToggled(tuneName) {
     // inverse tune state
-    this.setTune(tuneName, !this._data[tuneName]);
+    this.setTune(tuneName, !this._data['config'][tuneName]);
   }
 
   /**
@@ -385,7 +400,7 @@ export default class SimpleCarousel {
    * @returns {void}
    */
   setTune(tuneName, value) {
-    this._data[tuneName] = value;
+    this._data['config'][tuneName] = value;
 
     this.applyTune(tuneName, value);
 
@@ -421,7 +436,7 @@ export default class SimpleCarousel {
    * @returns {Element}
    */
   renderSettings() {
-    return this.tunes.render(this._data);
+    return this.tunes.render(this.data);
   }
 
   /**
