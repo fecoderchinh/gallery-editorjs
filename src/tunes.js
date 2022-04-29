@@ -45,19 +45,22 @@ export default class Tunes {
       //   title: 'Decrease Column'
       // },
       {
-        name: 'standardLayout',
+        name: 'standard',
         icon: standardLayout,
         title: 'Standard Layout',
+        default: true,
       },
       {
-        name: 'carouselEnable',
+        name: 'carousel',
         icon: carouselEnable,
         title: 'Enable Slide',
+        default: false,
       },
       {
-        name: 'masonryEnable',
+        name: 'masonry',
         icon: masonryEnable,
         title: 'Enable Masonry',
+        default: false,
       },
       // {
       //   name: 'withBorder',
@@ -108,10 +111,21 @@ export default class Tunes {
 
       el.addEventListener('click', () => {
         this.tuneClicked(tune.name);
+
+        const buttonsArray = el.parentNode.querySelectorAll('.' + this.CSS.buttonBase);
+
+        Array.from(buttonsArray).forEach((button) =>
+          button.classList.remove(this.CSS.buttonActive)
+        );
+
+        /**
+         * Mark active button
+         */
+        el.classList.toggle(this.CSS.buttonActive);
       });
 
       el.dataset.tune = tune.name;
-      el.classList.toggle(this.CSS.buttonActive, toolData['config'][tune.name]);
+      el.classList.toggle(this.CSS.buttonActive, toolData['config'] === tune.name);
 
       this.buttons.push(el);
 
@@ -126,9 +140,9 @@ export default class Tunes {
    * @param {string} tuneName - clicked tune name
    */
   tuneClicked(tuneName) {
-    const button = this.buttons.find(el => el.dataset.tune === tuneName);
+    // const button = this.buttons.find(el => el.dataset.tune === tuneName);
 
-    button.classList.toggle(this.CSS.buttonActive, !button.classList.contains(this.CSS.buttonActive));
+    // button.classList.toggle(this.CSS.buttonActive, !button.classList.contains(this.CSS.buttonActive));
 
     this.onChange(tuneName);
   }

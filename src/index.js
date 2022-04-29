@@ -23,7 +23,10 @@ export default class SimpleCarousel {
    */
   constructor({ data, config, api, readOnly  }) {
     this.api = api;
-    this._data = {};
+    this._data = {
+      items: [],
+      config: Tunes.tunes.find(tune => tune.default === true).name,
+    };
     this.data = data;
     this.IconClose = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon--cross" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
     this.IconLeft = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>';
@@ -235,12 +238,6 @@ export default class SimpleCarousel {
       }
     }
 
-    Tunes.tunes.forEach(({ name: tune }) => {
-      const value = typeof this._data['config'][tune] !== 'undefined' ? this._data['config'][tune] === true || this._data['config'][tune] === 'true' : false;
-
-      this.setTune(tune, value);
-    });
-
     return this._data;
   }
 
@@ -389,7 +386,8 @@ export default class SimpleCarousel {
    */
   tuneToggled(tuneName) {
     // inverse tune state
-    this.setTune(tuneName, !this._data['config'][tuneName]);
+    this.setTune(tuneName, this._data['config'] !== tuneName);
+    this._data['config'] = tuneName;
   }
 
   /**
@@ -400,23 +398,7 @@ export default class SimpleCarousel {
    * @returns {void}
    */
   setTune(tuneName, value) {
-    this._data['config'][tuneName] = value;
-
     this.applyTune(tuneName, value);
-
-    if (tuneName === 'stretched') {
-      /**
-       * Wait until the API is ready
-       */
-      Promise.resolve().then(() => {
-        const blockId = this.api.blocks.getCurrentBlockIndex();
-
-        this.api.blocks.stretchBlock(blockId, value);
-      })
-        .catch(/* err => {
-          // console.error(err);
-        }*/);
-    }
   }
 
   /**
@@ -436,7 +418,7 @@ export default class SimpleCarousel {
    * @returns {Element}
    */
   renderSettings() {
-    return this.tunes.render(this.data);
+    return this.tunes.render(this._data);
   }
 
   /**
