@@ -16,6 +16,8 @@ Forked and modified from [mr8bit/carousel-editorjs](https://github.com/mr8bit/ca
 
 ## Installation
 
+`npm i @vtchinh/gallery-editorjs`
+
 ### Manual downloading and connecting
 
 1. Upload folder `dist` from repository
