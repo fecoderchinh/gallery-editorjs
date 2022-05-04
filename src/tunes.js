@@ -1,12 +1,7 @@
 import { make } from './ui';
-// import bgIcon from './svg/background.svg';
-// import borderIcon from './svg/border.svg';
-// import stretchedIcon from './svg/stretched.svg';
-// import columnAdd from './svg/col-add.svg';
-// import columnMinus from './svg/col-minus.svg';
 import carouselEnable from './svg/slide.svg';
 import masonryEnable from './svg/columns.svg';
-import standardLayout from './svg/grid.svg';
+import standardEnable from './svg/grid.svg';
 
 /**
  * Working with Block Tunes
@@ -34,19 +29,9 @@ export default class Tunes {
    */
   static get tunes() {
     return [
-      // {
-      //   name: 'columnAdd',
-      //   icon: columnAdd,
-      //   title: 'Increase Column'
-      // },
-      // {
-      //   name: 'columnMinus',
-      //   icon: columnMinus,
-      //   title: 'Decrease Column'
-      // },
       {
         name: 'standard',
-        icon: standardLayout,
+        icon: standardEnable,
         title: 'Standard Layout',
         default: true,
       },
@@ -62,21 +47,6 @@ export default class Tunes {
         title: 'Enable Masonry',
         default: false,
       },
-      // {
-      //   name: 'withBorder',
-      //   icon: borderIcon,
-      //   title: 'With border'
-      // },
-      // {
-      //   name: 'stretched',
-      //   icon: stretchedIcon,
-      //   title: 'Stretch image'
-      // },
-      // {
-      //   name: 'withBackground',
-      //   icon: bgIcon,
-      //   title: 'With background'
-      // }
     ];
   }
 
@@ -140,10 +110,6 @@ export default class Tunes {
    * @param {string} tuneName - clicked tune name
    */
   tuneClicked(tuneName) {
-    // const button = this.buttons.find(el => el.dataset.tune === tuneName);
-
-    // button.classList.toggle(this.CSS.buttonActive, !button.classList.contains(this.CSS.buttonActive));
-
     this.onChange(tuneName);
   }
 }

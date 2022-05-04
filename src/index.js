@@ -26,11 +26,14 @@ export default class SimpleCarousel {
     this._data = {
       items: [],
       config: Tunes.tunes.find(tune => tune.default === true).name,
+      countItemEachRow: 1,
     };
     this.data = data;
     this.IconClose = '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon--cross" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
     this.IconLeft = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>';
     this.IconRight = '<svg xmlns="http://www.w3.org/2000/svg" class="icon " width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>';
+    this.IconPlus = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"> <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>';
+    this.IconMinus = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16"> <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/></svg>';
     this.config = {
       endpoints: config.endpoints || '',
       additionalRequestData: config.additionalRequestData || {},
@@ -101,7 +104,8 @@ export default class SimpleCarousel {
       inputUrl: 'cdxcarousel-inputUrl',
       caption: 'cdxcarousel-caption',
       list: 'cdxcarousel-list',
-      imagePreloader: 'image-tool__image-preloader'
+      imagePreloader: 'image-tool__image-preloader',
+      columnSetting: 'column__setting'
     };
   }
 
@@ -151,34 +155,18 @@ export default class SimpleCarousel {
         this.list.insertBefore(loadItem, this.addButton);
       }
     }
+
+    // this.wrapper.addEventListener('click', (e) => {
+    //   Array.from(document.querySelectorAll('div')).forEach(function (el) {
+    //     el.classList.remove('column__setting__wrapper--display');
+    //   });
+    //   e.target.classList.add('column__setting__wrapper--display');
+    // });
+
+    this.wrapper.classList.add('column-'+this._data['countItemEachRow']);
+
     return this.wrapper;
   }
-
-  // eslint-disable-next-line require-jsdoc
-  /* save(blockContent) {
-    const list = blockContent.getElementsByClassName(this.CSS.item);
-    const caption = blockContent.querySelector('[contenteditable]');
-    const data = {config: {carouselEnable: this._data['carouselEnable']}, data: []};
-
-    if (list.length > 0) {
-      for (const item of list) {
-        if (item.firstChild.value) {
-          data['data'].push({
-            url: item.firstChild.value,
-            caption: caption.innerHTML || '',
-          });
-        }
-      }
-    }
-
-    Tunes.tunes.forEach(({ name: tune }) => {
-      const value = typeof data['config'][tune] !== 'undefined' ? data['config'][tune] === true || data[tune] === 'true' : false;
-
-      this.setTune(tune, value);
-    });
-
-    return data;
-  } */
 
   /**
    * Return Block data
@@ -205,6 +193,7 @@ export default class SimpleCarousel {
 
     this._data.config = listData.config || Tunes.tunes.find((tune) => tune.default === true).name;
     this._data.items = listData.items || [];
+    this._data.countItemEachRow = listData.countItemEachRow || 1;
 
     const oldView = this.wrapper;
 
@@ -226,6 +215,7 @@ export default class SimpleCarousel {
     const list = this.wrapper.getElementsByClassName(this.CSS.item);
     const caption = this.wrapper.querySelector('[contenteditable]');
     // const data = {config: {carouselEnable: this._data['carouselEnable']}, data: []};
+    const getColumns = this.wrapper.querySelector('.column__setting__wrapper');
 
     if (list.length > 0) {
       for (const item of list) {
@@ -237,6 +227,8 @@ export default class SimpleCarousel {
         }
       }
     }
+
+    this._data.countItemEachRow = getColumns.dataset.index;
 
     return this._data;
   }
@@ -261,7 +253,7 @@ export default class SimpleCarousel {
   creteNewItem(url, caption) {
     // Create item, remove button and field for image url
     const block = make('div', [ this.CSS.block ]);
-    const item = make('div', [ this.CSS.item ]);
+    const item = make('div', [this.CSS.item, 'items_column']);
     const removeBtn = make('div', [ this.CSS.removeBtn ]);
     const leftBtn = make('div', [ this.CSS.leftBtn ]);
     const rightBtn = make('div', [ this.CSS.rightBtn ]);
@@ -451,14 +443,54 @@ export default class SimpleCarousel {
   createAddButton() {
     const addButton = make('div', [this.CSS.button, this.CSS.addButton]);
     const block = make('div', [ this.CSS.block ]);
+    const leftBtn = make('div', [this.CSS.leftBtn, this.CSS.columnSetting]);
+    const rightBtn = make('div', [this.CSS.rightBtn, this.CSS.columnSetting]);
+    const item = make('div', [this.CSS.item, 'column__setting__wrapper']);
+
+    item.dataset.index = this._data['countItemEachRow'] ? this._data['countItemEachRow'] : 1;
+
+    leftBtn.innerHTML = this.IconPlus;
+    leftBtn.style = 'padding: 4px; right:  0;';
+    leftBtn.addEventListener('click', () => {
+      var index = this._data['countItemEachRow'];
+
+      if(index < 5) {
+        item.dataset.index++;
+        this.setCountItemEachRow(item.dataset.index);
+      }
+    });
+    rightBtn.innerHTML = this.IconMinus;
+    rightBtn.style = 'padding: 4px; right: 0px; top: 45px;';
+    rightBtn.addEventListener('click', () => {
+      var index = this._data['countItemEachRow'];
+
+      if(index > 1) {
+        item.dataset.index--;
+        this.setCountItemEachRow(item.dataset.index);
+      }
+    });
 
     addButton.innerHTML = `${buttonIcon} Add Image`;
     addButton.addEventListener('click', () => {
       this.onSelectFile();
     });
+
+    item.appendChild(leftBtn);
+    item.appendChild(rightBtn);
+    block.appendChild(item);
+
     block.appendChild(addButton);
 
     return block;
+  }
+
+  /**
+   * setting the number item per row
+   */
+  setCountItemEachRow(number) {
+    this._data['countItemEachRow'] = number;
+    this.wrapper.classList.remove('column-1', 'column-2', 'column-3', 'column-4', 'column-5');
+    this.wrapper.classList.add('column-'+number);
   }
 }
 
