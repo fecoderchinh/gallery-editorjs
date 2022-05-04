@@ -1,4 +1,5 @@
-![](https://badgen.net/badge/Editor.js/v2.0/blue)
+![](https://badgen.net/badge/Editor.js/v2.0/blue) 
+![](https://badgen.net/badge/Gallery-editorjs/v1.1.1/blue)
 
 # Carousel Tool
 
@@ -11,8 +12,9 @@ Forked and modified from [mr8bit/carousel-editorjs](https://github.com/mr8bit/ca
 
 - Uploading file from the device
 - Preload image
-
-**Note** This Tool requires server-side implementation for file uploading. See [backend response format](#server-format) for more details.
+- Change the image position
+- Toggle the gallery style ([standard, carousel, masonry] are included)
+- Column settings
 
 ## Installation
 
@@ -39,13 +41,13 @@ var editor = EditorJS({
   tools: {
     ...
     carousel: {
-                    class: Carousel,
-                    config: {
-                        endpoints: {
-                            byFile: "URL_FETCH",
-                        }
-                    }
-                },
+        class: Carousel,
+        config: {
+            endpoints: {
+                byFile: "URL_FETCH",
+            }
+        }
+    },
   }
 
   ...
