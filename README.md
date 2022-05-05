@@ -1,12 +1,12 @@
 ![](https://badgen.net/badge/Editor.js/v2.0/blue) 
-![](https://badgen.net/badge/Gallery-editorjs/v1.1.1/blue)
+![](https://badgen.net/badge/Gallery-editorjs/v1.1.4/blue)
 
 # Carousel Tool
 
 Gallery with custom column for [Editor.js](https://editorjs.io).
 Forked and modified from [mr8bit/carousel-editorjs](https://github.com/mr8bit/carousel-editorjs)
 
-![](./img/prelaod.png)
+![](./img/preload.png)
 
 ## Features
 
@@ -53,3 +53,47 @@ var editor = EditorJS({
   ...
 });
 ```
+
+
+# Change Log
+All notable changes to this project will be documented in this file.
+
+## [1.1.5] - 2022-05-05
+  
+We have changed the preloader.
+ 
+### Changed
+
+- Image Preloader for example.
+
+## [1.1.4] - 2022-05-05
+  
+We have fixed some bugs when saving the caption.
+
+### Fixed
+
+- Bug on saving captions.
+
+## [1.1.3] - 2022-05-05
+  
+Change the way to catch caption HTML structure.
+ 
+### Changed
+
+- Refactor captions.
+
+## [1.1.2] - 2022-05-04
+  
+We have fixed some bugs when saving the caption.
+ 
+### Fixed
+
+- Bug on saving captions
+ 
+## [1.1.1] - 2022-05-04
+  
+We have tested and fixed so many times from version 1.0.0
+ 
+## [1.0.0] - 2022-04-25
+ 
+- Released.

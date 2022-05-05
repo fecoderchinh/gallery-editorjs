@@ -213,8 +213,6 @@ export default class SimpleCarousel {
     this._data.items = [];
 
     const list = this.wrapper.getElementsByClassName(this.CSS.item);
-    const caption = this.wrapper.querySelector('[contenteditable]');
-    // const data = {config: {carouselEnable: this._data['carouselEnable']}, data: []};
     const getColumns = this.wrapper.querySelector('.column__setting__wrapper');
 
     if (list.length > 0) {
@@ -222,7 +220,7 @@ export default class SimpleCarousel {
         if (item.firstChild.value) {
           this._data.items.push({
             url: item.firstChild.value,
-            caption: caption.innerHTML || '',
+            caption: item.querySelector('.cdxcarousel-caption.cdx-input[contenteditable]').innerHTML || '',
           });
         }
       }
