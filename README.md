@@ -1,5 +1,5 @@
 ![](https://badgen.net/badge/Editor.js/v2.0/blue) 
-![](https://badgen.net/badge/Gallery-editorjs/v1.1.4/blue)
+![](https://badgen.net/badge/Gallery-editorjs/v1.1.5/blue)
 
 # Carousel Tool
 
