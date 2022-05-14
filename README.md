@@ -58,10 +58,19 @@ var editor = EditorJS({
 ```
 
 For `removeImage` configuration, all you need is providing a request for `POST['image']` key.
+<br>Don't forget to put `csrf-token` meta as something like `<meta name="csrf-token" content="{{ csrf_token }}">` to your `<head>`
 
 
 # Change Log
 All notable changes to this project will be documented in this file.
+
+## [1.2.1] - 2022-05-14
+  
+Provide the ability to remove the image from Server.
+ 
+### Changed
+
+- Added some note for the `csrf-token`
 
 ## [1.2.0] - 2022-05-14
   
