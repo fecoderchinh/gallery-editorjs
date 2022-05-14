@@ -3,6 +3,7 @@ import Uploader from './uploader';
 import Ui from './ui';
 import Tunes from './tunes';
 import buttonIcon from './svg/button-icon.svg';
+import ajax from '@codexteam/ajax';
 require('./index.css').toString();
 
 // eslint-disable-next-line require-jsdoc
@@ -280,6 +281,9 @@ export default class SimpleCarousel {
     removeBtn.innerHTML = this.IconClose;
     removeBtn.addEventListener('click', () => {
       block.remove();
+      if(this.config.endpoints.removeImage !== '' || this.config.endpoints.removeImage !== undefined) {
+        this.removeImage(block.querySelector('img').getAttribute('src'));
+      }
     });
     removeBtn.style.display = 'none';
 
@@ -349,6 +353,26 @@ export default class SimpleCarousel {
     } else {
       this.uploadingFailed('incorrect response: ' + JSON.stringify(response));
     }
+  }
+
+  /**
+   * Handle remove image
+   * @private
+   */
+  removeImage(url) {
+    ajax.post({
+      url: this.config.endpoints.removeImage,
+      data: {
+        image: url,
+      },
+      mode: 'same-origin',
+      type: ajax.contentType.FORM,
+      headers: Object.assign({'X-CSRFToken': document.querySelector('[name=csrf-token]').getAttribute('content')}, this.config.additionalRequestHeaders),
+    }).then(response => {
+      response.body;
+    }).catch((error) => {
+      error.body;
+    });
   }
 
   /**

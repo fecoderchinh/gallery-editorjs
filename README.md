@@ -4,7 +4,8 @@
 # Carousel Tool
 
 Gallery with custom column for [Editor.js](https://editorjs.io).
-Forked and modified from [mr8bit/carousel-editorjs](https://github.com/mr8bit/carousel-editorjs)
+
+Inspired from [mr8bit/carousel-editorjs](https://github.com/mr8bit/carousel-editorjs)
 
 ![](./img/preload.png)
 
@@ -13,8 +14,9 @@ Forked and modified from [mr8bit/carousel-editorjs](https://github.com/mr8bit/ca
 - Uploading file from the device
 - Preload image
 - Change the image position
-- Toggle the gallery style ([standard, carousel, masonry] are included)
+- Toggle the gallery style ([`standard`, `carousel`, `masonry`] are included)
 - Column settings
+- Remove Image From Server
 
 ## Installation
 
@@ -45,6 +47,7 @@ var editor = EditorJS({
         config: {
             endpoints: {
                 byFile: "URL_FETCH",
+                removeImage: "URL_FETCH", //default null
             }
         }
     },
@@ -54,9 +57,19 @@ var editor = EditorJS({
 });
 ```
 
+For `removeImage` configuration, all you need is providing a request for `POST['image']` key.
+
 
 # Change Log
 All notable changes to this project will be documented in this file.
+
+## [1.2.0] - 2022-05-14
+  
+Provide the ability to remove the image from Server.
+ 
+### Added
+
+- API to remove image from server.
 
 ## [1.1.5] - 2022-05-05
   
