@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   module: {
@@ -9,12 +10,12 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            query: {
+            options: {
               presets: [ '@babel/preset-env' ],
             },
           },
-          'eslint-loader'
-        ]
+          // 'eslint-loader'
+        ],
       },
       {
         test: /\.css$/,
@@ -27,10 +28,7 @@ module.exports = {
               postcssOptions: {
                 plugins: [
                   [
-                    'postcss-nesting',
-                    {
-                      // Options
-                    },
+                    require('postcss-nested')
                   ],
                 ],
               },
@@ -40,10 +38,11 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        loader: 'svg-inline-loader?removeSVGTagAttrs=false'
+        loader: 'svg-inline-loader'
       }
     ]
   },
+  plugins: [new ESLintPlugin(),],
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/',
