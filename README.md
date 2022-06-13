@@ -48,7 +48,11 @@ var editor = EditorJS({
             endpoints: {
                 byFile: "URL_FETCH",
                 removeImage: "URL_FETCH", //default null
-            }
+            },
+            additionalRequestData: { // for custom data
+                name: 'your custom data name',
+                order_data: 'your order custom data',
+            },
         }
     },
   }
