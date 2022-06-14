@@ -49,6 +49,12 @@ var editor = EditorJS({
                 byFile: "URL_FETCH",
                 removeImage: "URL_FETCH", //default null
             },
+            additionalRequestHeaders: {
+                'authorization': 'Bearer eyJhbGciJ9...TJVA95OrM7h7HgQ',
+                // ...
+            },
+            field: 'image',
+            types: 'image/*',
             additionalRequestData: { // for custom data
                 name: 'your custom data name',
                 order_data: 'your order custom data',
