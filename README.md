@@ -63,13 +63,12 @@ var editor = EditorJS({
         }
     },
   }
-  
-  function your_prefer_callback_data() {
-      return {'key': 'value'};
-  }
-
   ...
 });
+
+function your_prefer_callback_data() {
+  return {'key': 'value'};
+}
 ```
 
 For `removeImage` configuration, all you need is providing a request for `POST['image']` key.
