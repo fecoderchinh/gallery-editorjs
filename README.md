@@ -1,5 +1,5 @@
-![](https://badgen.net/badge/Editor.js/v2.0/blue) 
-![](https://badgen.net/badge/Gallery-editorjs/v1.2.0/blue)
+[![](https://badgen.net/badge/@editorjs/v2.0/blue)](https://www.npmjs.com/package/@editorjs/editorjs) 
+[![](https://badgen.net/badge/Gallery-editorjs/v1.2.2/blue)](https://www.npmjs.com/package/@vtchinh/gallery-editorjs)
 
 # Carousel Tool
 
@@ -53,8 +53,13 @@ var editor = EditorJS({
                 name: 'your custom data name',
                 order_data: 'your order custom data',
             },
+            galleryCallback: 'your_prefer_callback_data' // object return is required
         }
     },
+  }
+  
+  function your_prefer_callback_data() {
+      return {'key': 'value'};
   }
 
   ...
@@ -67,6 +72,13 @@ For `removeImage` configuration, all you need is providing a request for `POST['
 
 # Change Log
 All notable changes to this project will be documented in this file.
+
+## [1.2.2] - 2022-06-14
+
+Now we can have more custom data on upload.
+### Added
+
+- Upload data callback
 
 ## [1.2.1] - 2022-05-14
   

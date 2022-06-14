@@ -45,6 +45,7 @@ export default class SimpleCarousel {
       buttonContent: config.buttonContent || '',
       uploader: config.uploader || undefined,
       actions: config.actions || [],
+      galleryCallback: config.galleryCallback || {}
     };
     /**
      * Module for file uploading
@@ -494,6 +495,8 @@ export default class SimpleCarousel {
 
     addButton.innerHTML = `${buttonIcon} Add Image`;
     addButton.addEventListener('click', () => {
+      if(typeof window[this.config.galleryCallback] === 'function' && typeof window[this.config.galleryCallback]() === 'object')
+        Object.assign(this.config.additionalRequestData, window[this.config.galleryCallback]());
       this.onSelectFile();
     });
 
