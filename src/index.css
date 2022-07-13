@@ -143,6 +143,30 @@
 .column-5 .cdxcarousel-block {
     width: 20% !important;
 }
+
+.cdxcarousel-block {
+  width: 20% !important;
+}
+
+.cdxcarousel-item {
+  height: auto !important;
+}
+
+.cdxcarousel-item img {
+  height: 125px !important;
+}
+
+.cdxcarousel-addImage {
+  height: 123px !important;
+  margin: 5px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.cdxcarousel-addImage:hover, .cdxcarousel-addImage:focus {
+  border-radius: 3px !important;
+}
+
 .image-tool {
 
   &__image {

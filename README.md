@@ -78,6 +78,12 @@ For `removeImage` configuration, all you need is providing a request for `POST['
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.2.3] - 2022-07-13
+
+### Added
+
+- Add some styles for fixing the image size.
+
 ## [1.2.2] - 2022-06-14
 
 Now we can have more custom data on upload.
