@@ -1,5 +1,5 @@
 [![](https://badgen.net/badge/@editorjs/v2.0/blue)](https://www.npmjs.com/package/@editorjs/editorjs) 
-[![](https://badgen.net/badge/Gallery-editorjs/v1.2.2/blue)](https://www.npmjs.com/package/@vtchinh/gallery-editorjs)
+[![](https://badgen.net/badge/Gallery-editorjs/v1.2.3/blue)](https://www.npmjs.com/package/@vtchinh/gallery-editorjs)
 
 # Carousel Tool
 

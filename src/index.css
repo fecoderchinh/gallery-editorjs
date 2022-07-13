@@ -167,6 +167,16 @@
   border-radius: 3px !important;
 }
 
+.cdxcarousel-leftBtn, .cdxcarousel-rightBtn {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.cdxcarousel-removeBtn {
+  width: 20px !important;
+  height: 20px !important;
+}
+
 .image-tool {
 
   &__image {
